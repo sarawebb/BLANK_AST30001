@@ -1,0 +1,13 @@
+abfind
+standard_out     'HD122563.out1'
+summary_out      'HD122563.out2'
+smoothed_out     'HD122563.out3'
+model_in         'HD122563.atm'
+lines_in         'HD122563.ew'
+atmosphere    1
+units         0
+damping       0
+trudamp       0
+lines         1
+flux/int      0
+obspectrum    0

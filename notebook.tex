@@ -1,0 +1,1250 @@
+
+% Default to the notebook output style
+
+    
+
+
+% Inherit from the specified cell style.
+
+
+
+
+    
+\documentclass[11pt]{article}
+
+    
+    
+    \usepackage[T1]{fontenc}
+    % Nicer default font (+ math font) than Computer Modern for most use cases
+    \usepackage{mathpazo}
+
+    % Basic figure setup, for now with no caption control since it's done
+    % automatically by Pandoc (which extracts ![](path) syntax from Markdown).
+    \usepackage{graphicx}
+    % We will generate all images so they have a width \maxwidth. This means
+    % that they will get their normal width if they fit onto the page, but
+    % are scaled down if they would overflow the margins.
+    \makeatletter
+    \def\maxwidth{\ifdim\Gin@nat@width>\linewidth\linewidth
+    \else\Gin@nat@width\fi}
+    \makeatother
+    \let\Oldincludegraphics\includegraphics
+    % Set max figure width to be 80% of text width, for now hardcoded.
+    \renewcommand{\includegraphics}[1]{\Oldincludegraphics[width=.8\maxwidth]{#1}}
+    % Ensure that by default, figures have no caption (until we provide a
+    % proper Figure object with a Caption API and a way to capture that
+    % in the conversion process - todo).
+    \usepackage{caption}
+    \DeclareCaptionLabelFormat{nolabel}{}
+    \captionsetup{labelformat=nolabel}
+
+    \usepackage{adjustbox} % Used to constrain images to a maximum size 
+    \usepackage{xcolor} % Allow colors to be defined
+    \usepackage{enumerate} % Needed for markdown enumerations to work
+    \usepackage{geometry} % Used to adjust the document margins
+    \usepackage{amsmath} % Equations
+    \usepackage{amssymb} % Equations
+    \usepackage{textcomp} % defines textquotesingle
+    % Hack from http://tex.stackexchange.com/a/47451/13684:
+    \AtBeginDocument{%
+        \def\PYZsq{\textquotesingle}% Upright quotes in Pygmentized code
+    }
+    \usepackage{upquote} % Upright quotes for verbatim code
+    \usepackage{eurosym} % defines \euro
+    \usepackage[mathletters]{ucs} % Extended unicode (utf-8) support
+    \usepackage[utf8x]{inputenc} % Allow utf-8 characters in the tex document
+    \usepackage{fancyvrb} % verbatim replacement that allows latex
+    \usepackage{grffile} % extends the file name processing of package graphics 
+                         % to support a larger range 
+    % The hyperref package gives us a pdf with properly built
+    % internal navigation ('pdf bookmarks' for the table of contents,
+    % internal cross-reference links, web links for URLs, etc.)
+    \usepackage{hyperref}
+    \usepackage{longtable} % longtable support required by pandoc >1.10
+    \usepackage{booktabs}  % table support for pandoc > 1.12.2
+    \usepackage[inline]{enumitem} % IRkernel/repr support (it uses the enumerate* environment)
+    \usepackage[normalem]{ulem} % ulem is needed to support strikethroughs (\sout)
+                                % normalem makes italics be italics, not underlines
+    
+
+    
+    
+    % Colors for the hyperref package
+    \definecolor{urlcolor}{rgb}{0,.145,.698}
+    \definecolor{linkcolor}{rgb}{.71,0.21,0.01}
+    \definecolor{citecolor}{rgb}{.12,.54,.11}
+
+    % ANSI colors
+    \definecolor{ansi-black}{HTML}{3E424D}
+    \definecolor{ansi-black-intense}{HTML}{282C36}
+    \definecolor{ansi-red}{HTML}{E75C58}
+    \definecolor{ansi-red-intense}{HTML}{B22B31}
+    \definecolor{ansi-green}{HTML}{00A250}
+    \definecolor{ansi-green-intense}{HTML}{007427}
+    \definecolor{ansi-yellow}{HTML}{DDB62B}
+    \definecolor{ansi-yellow-intense}{HTML}{B27D12}
+    \definecolor{ansi-blue}{HTML}{208FFB}
+    \definecolor{ansi-blue-intense}{HTML}{0065CA}
+    \definecolor{ansi-magenta}{HTML}{D160C4}
+    \definecolor{ansi-magenta-intense}{HTML}{A03196}
+    \definecolor{ansi-cyan}{HTML}{60C6C8}
+    \definecolor{ansi-cyan-intense}{HTML}{258F8F}
+    \definecolor{ansi-white}{HTML}{C5C1B4}
+    \definecolor{ansi-white-intense}{HTML}{A1A6B2}
+
+    % commands and environments needed by pandoc snippets
+    % extracted from the output of `pandoc -s`
+    \providecommand{\tightlist}{%
+      \setlength{\itemsep}{0pt}\setlength{\parskip}{0pt}}
+    \DefineVerbatimEnvironment{Highlighting}{Verbatim}{commandchars=\\\{\}}
+    % Add ',fontsize=\small' for more characters per line
+    \newenvironment{Shaded}{}{}
+    \newcommand{\KeywordTok}[1]{\textcolor[rgb]{0.00,0.44,0.13}{\textbf{{#1}}}}
+    \newcommand{\DataTypeTok}[1]{\textcolor[rgb]{0.56,0.13,0.00}{{#1}}}
+    \newcommand{\DecValTok}[1]{\textcolor[rgb]{0.25,0.63,0.44}{{#1}}}
+    \newcommand{\BaseNTok}[1]{\textcolor[rgb]{0.25,0.63,0.44}{{#1}}}
+    \newcommand{\FloatTok}[1]{\textcolor[rgb]{0.25,0.63,0.44}{{#1}}}
+    \newcommand{\CharTok}[1]{\textcolor[rgb]{0.25,0.44,0.63}{{#1}}}
+    \newcommand{\StringTok}[1]{\textcolor[rgb]{0.25,0.44,0.63}{{#1}}}
+    \newcommand{\CommentTok}[1]{\textcolor[rgb]{0.38,0.63,0.69}{\textit{{#1}}}}
+    \newcommand{\OtherTok}[1]{\textcolor[rgb]{0.00,0.44,0.13}{{#1}}}
+    \newcommand{\AlertTok}[1]{\textcolor[rgb]{1.00,0.00,0.00}{\textbf{{#1}}}}
+    \newcommand{\FunctionTok}[1]{\textcolor[rgb]{0.02,0.16,0.49}{{#1}}}
+    \newcommand{\RegionMarkerTok}[1]{{#1}}
+    \newcommand{\ErrorTok}[1]{\textcolor[rgb]{1.00,0.00,0.00}{\textbf{{#1}}}}
+    \newcommand{\NormalTok}[1]{{#1}}
+    
+    % Additional commands for more recent versions of Pandoc
+    \newcommand{\ConstantTok}[1]{\textcolor[rgb]{0.53,0.00,0.00}{{#1}}}
+    \newcommand{\SpecialCharTok}[1]{\textcolor[rgb]{0.25,0.44,0.63}{{#1}}}
+    \newcommand{\VerbatimStringTok}[1]{\textcolor[rgb]{0.25,0.44,0.63}{{#1}}}
+    \newcommand{\SpecialStringTok}[1]{\textcolor[rgb]{0.73,0.40,0.53}{{#1}}}
+    \newcommand{\ImportTok}[1]{{#1}}
+    \newcommand{\DocumentationTok}[1]{\textcolor[rgb]{0.73,0.13,0.13}{\textit{{#1}}}}
+    \newcommand{\AnnotationTok}[1]{\textcolor[rgb]{0.38,0.63,0.69}{\textbf{\textit{{#1}}}}}
+    \newcommand{\CommentVarTok}[1]{\textcolor[rgb]{0.38,0.63,0.69}{\textbf{\textit{{#1}}}}}
+    \newcommand{\VariableTok}[1]{\textcolor[rgb]{0.10,0.09,0.49}{{#1}}}
+    \newcommand{\ControlFlowTok}[1]{\textcolor[rgb]{0.00,0.44,0.13}{\textbf{{#1}}}}
+    \newcommand{\OperatorTok}[1]{\textcolor[rgb]{0.40,0.40,0.40}{{#1}}}
+    \newcommand{\BuiltInTok}[1]{{#1}}
+    \newcommand{\ExtensionTok}[1]{{#1}}
+    \newcommand{\PreprocessorTok}[1]{\textcolor[rgb]{0.74,0.48,0.00}{{#1}}}
+    \newcommand{\AttributeTok}[1]{\textcolor[rgb]{0.49,0.56,0.16}{{#1}}}
+    \newcommand{\InformationTok}[1]{\textcolor[rgb]{0.38,0.63,0.69}{\textbf{\textit{{#1}}}}}
+    \newcommand{\WarningTok}[1]{\textcolor[rgb]{0.38,0.63,0.69}{\textbf{\textit{{#1}}}}}
+    
+    
+    % Define a nice break command that doesn't care if a line doesn't already
+    % exist.
+    \def\br{\hspace*{\fill} \\* }
+    % Math Jax compatability definitions
+    \def\gt{>}
+    \def\lt{<}
+    % Document parameters
+    \title{template\_AST3001-assignment1-SOLVED}
+    
+    
+    
+
+    % Pygments definitions
+    
+\makeatletter
+\def\PY@reset{\let\PY@it=\relax \let\PY@bf=\relax%
+    \let\PY@ul=\relax \let\PY@tc=\relax%
+    \let\PY@bc=\relax \let\PY@ff=\relax}
+\def\PY@tok#1{\csname PY@tok@#1\endcsname}
+\def\PY@toks#1+{\ifx\relax#1\empty\else%
+    \PY@tok{#1}\expandafter\PY@toks\fi}
+\def\PY@do#1{\PY@bc{\PY@tc{\PY@ul{%
+    \PY@it{\PY@bf{\PY@ff{#1}}}}}}}
+\def\PY#1#2{\PY@reset\PY@toks#1+\relax+\PY@do{#2}}
+
+\expandafter\def\csname PY@tok@w\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.73,0.73}{##1}}}
+\expandafter\def\csname PY@tok@c\endcsname{\let\PY@it=\textit\def\PY@tc##1{\textcolor[rgb]{0.25,0.50,0.50}{##1}}}
+\expandafter\def\csname PY@tok@cp\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.74,0.48,0.00}{##1}}}
+\expandafter\def\csname PY@tok@k\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@kp\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@kt\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.69,0.00,0.25}{##1}}}
+\expandafter\def\csname PY@tok@o\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+\expandafter\def\csname PY@tok@ow\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.67,0.13,1.00}{##1}}}
+\expandafter\def\csname PY@tok@nb\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@nf\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.00,0.00,1.00}{##1}}}
+\expandafter\def\csname PY@tok@nc\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.00,1.00}{##1}}}
+\expandafter\def\csname PY@tok@nn\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.00,1.00}{##1}}}
+\expandafter\def\csname PY@tok@ne\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.82,0.25,0.23}{##1}}}
+\expandafter\def\csname PY@tok@nv\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.10,0.09,0.49}{##1}}}
+\expandafter\def\csname PY@tok@no\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.53,0.00,0.00}{##1}}}
+\expandafter\def\csname PY@tok@nl\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.63,0.63,0.00}{##1}}}
+\expandafter\def\csname PY@tok@ni\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.60,0.60,0.60}{##1}}}
+\expandafter\def\csname PY@tok@na\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.49,0.56,0.16}{##1}}}
+\expandafter\def\csname PY@tok@nt\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@nd\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.67,0.13,1.00}{##1}}}
+\expandafter\def\csname PY@tok@s\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@sd\endcsname{\let\PY@it=\textit\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@si\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.73,0.40,0.53}{##1}}}
+\expandafter\def\csname PY@tok@se\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.73,0.40,0.13}{##1}}}
+\expandafter\def\csname PY@tok@sr\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.40,0.53}{##1}}}
+\expandafter\def\csname PY@tok@ss\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.10,0.09,0.49}{##1}}}
+\expandafter\def\csname PY@tok@sx\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@m\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+\expandafter\def\csname PY@tok@gh\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.00,0.50}{##1}}}
+\expandafter\def\csname PY@tok@gu\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.50,0.00,0.50}{##1}}}
+\expandafter\def\csname PY@tok@gd\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.63,0.00,0.00}{##1}}}
+\expandafter\def\csname PY@tok@gi\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.00,0.63,0.00}{##1}}}
+\expandafter\def\csname PY@tok@gr\endcsname{\def\PY@tc##1{\textcolor[rgb]{1.00,0.00,0.00}{##1}}}
+\expandafter\def\csname PY@tok@ge\endcsname{\let\PY@it=\textit}
+\expandafter\def\csname PY@tok@gs\endcsname{\let\PY@bf=\textbf}
+\expandafter\def\csname PY@tok@gp\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.00,0.50}{##1}}}
+\expandafter\def\csname PY@tok@go\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.53,0.53,0.53}{##1}}}
+\expandafter\def\csname PY@tok@gt\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.00,0.27,0.87}{##1}}}
+\expandafter\def\csname PY@tok@err\endcsname{\def\PY@bc##1{\setlength{\fboxsep}{0pt}\fcolorbox[rgb]{1.00,0.00,0.00}{1,1,1}{\strut ##1}}}
+\expandafter\def\csname PY@tok@kc\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@kd\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@kn\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@kr\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@bp\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@fm\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.00,0.00,1.00}{##1}}}
+\expandafter\def\csname PY@tok@vc\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.10,0.09,0.49}{##1}}}
+\expandafter\def\csname PY@tok@vg\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.10,0.09,0.49}{##1}}}
+\expandafter\def\csname PY@tok@vi\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.10,0.09,0.49}{##1}}}
+\expandafter\def\csname PY@tok@vm\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.10,0.09,0.49}{##1}}}
+\expandafter\def\csname PY@tok@sa\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@sb\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@sc\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@dl\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@s2\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@sh\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@s1\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@mb\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+\expandafter\def\csname PY@tok@mf\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+\expandafter\def\csname PY@tok@mh\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+\expandafter\def\csname PY@tok@mi\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+\expandafter\def\csname PY@tok@il\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+\expandafter\def\csname PY@tok@mo\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+\expandafter\def\csname PY@tok@ch\endcsname{\let\PY@it=\textit\def\PY@tc##1{\textcolor[rgb]{0.25,0.50,0.50}{##1}}}
+\expandafter\def\csname PY@tok@cm\endcsname{\let\PY@it=\textit\def\PY@tc##1{\textcolor[rgb]{0.25,0.50,0.50}{##1}}}
+\expandafter\def\csname PY@tok@cpf\endcsname{\let\PY@it=\textit\def\PY@tc##1{\textcolor[rgb]{0.25,0.50,0.50}{##1}}}
+\expandafter\def\csname PY@tok@c1\endcsname{\let\PY@it=\textit\def\PY@tc##1{\textcolor[rgb]{0.25,0.50,0.50}{##1}}}
+\expandafter\def\csname PY@tok@cs\endcsname{\let\PY@it=\textit\def\PY@tc##1{\textcolor[rgb]{0.25,0.50,0.50}{##1}}}
+
+\def\PYZbs{\char`\\}
+\def\PYZus{\char`\_}
+\def\PYZob{\char`\{}
+\def\PYZcb{\char`\}}
+\def\PYZca{\char`\^}
+\def\PYZam{\char`\&}
+\def\PYZlt{\char`\<}
+\def\PYZgt{\char`\>}
+\def\PYZsh{\char`\#}
+\def\PYZpc{\char`\%}
+\def\PYZdl{\char`\$}
+\def\PYZhy{\char`\-}
+\def\PYZsq{\char`\'}
+\def\PYZdq{\char`\"}
+\def\PYZti{\char`\~}
+% for compatibility with earlier versions
+\def\PYZat{@}
+\def\PYZlb{[}
+\def\PYZrb{]}
+\makeatother
+
+
+    % Exact colors from NB
+    \definecolor{incolor}{rgb}{0.0, 0.0, 0.5}
+    \definecolor{outcolor}{rgb}{0.545, 0.0, 0.0}
+
+
+
+    
+    % Prevent overflowing lines due to hard-to-break entities
+    \sloppy 
+    % Setup hyperref package
+    \hypersetup{
+      breaklinks=true,  % so long urls are correctly broken across lines
+      colorlinks=true,
+      urlcolor=urlcolor,
+      linkcolor=linkcolor,
+      citecolor=citecolor,
+      }
+    % Slightly bigger margins than the latex defaults
+    
+    \geometry{verbose,tmargin=1in,bmargin=1in,lmargin=1in,rmargin=1in}
+    
+    
+
+    \begin{document}
+    
+    
+    \maketitle
+    
+    
+
+    
+    \section{Welcome to Assignment 1 for
+AST3001.}\label{welcome-to-assignment-1-for-ast3001.}
+
+For those unfamiliar with Jupyter Notebook, each window can be run by
+simply pressing 'shift'+'enter' keys. To add another cell to run more
+code, simply click the insert button at the top of the browser, and
+'Insert Cell Above/Below'. You can find some tutorials at this website:
+https://github.com/jupyter/jupyter/wiki/A-gallery-of-interesting-Jupyter-Notebooks.
+
+Any issues or quetions please email swebb@swin.edu.au with the subject
+title containing 'AST3001 assignment - '
+
+ENJOY!
+
+    First let's start by loading all our modules for this session, because
+we are running on an online interactive session we'll need to install
+the modules first (note: when running python on your local computer you
+won't need to do this).
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}1}]:} \PY{o}{!}pip install astropy 
+        \PY{o}{!}pip install matplotlib 
+        \PY{o}{!}pip install numpy
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+Requirement already satisfied: astropy in /anaconda3/lib/python3.6/site-packages (3.0.5)
+Requirement already satisfied: numpy>=1.10.0 in /anaconda3/lib/python3.6/site-packages (from astropy) (1.16.1)
+\textcolor{ansi-yellow}{WARNING: You are using pip version 19.2.1, however version 19.2.2 is available.
+You should consider upgrading via the 'pip install --upgrade pip' command.}
+Requirement already satisfied: matplotlib in /anaconda3/lib/python3.6/site-packages (3.1.1)
+Requirement already satisfied: pyparsing!=2.0.4,!=2.1.2,!=2.1.6,>=2.0.1 in /anaconda3/lib/python3.6/site-packages (from matplotlib) (2.2.0)
+Requirement already satisfied: cycler>=0.10 in /anaconda3/lib/python3.6/site-packages (from matplotlib) (0.10.0)
+Requirement already satisfied: kiwisolver>=1.0.1 in /anaconda3/lib/python3.6/site-packages (from matplotlib) (1.0.1)
+Requirement already satisfied: numpy>=1.11 in /anaconda3/lib/python3.6/site-packages (from matplotlib) (1.16.1)
+Requirement already satisfied: python-dateutil>=2.1 in /anaconda3/lib/python3.6/site-packages (from matplotlib) (2.6.1)
+Requirement already satisfied: six in /anaconda3/lib/python3.6/site-packages (from cycler>=0.10->matplotlib) (1.11.0)
+Requirement already satisfied: setuptools in /anaconda3/lib/python3.6/site-packages (from kiwisolver>=1.0.1->matplotlib) (40.6.2)
+\textcolor{ansi-yellow}{WARNING: You are using pip version 19.2.1, however version 19.2.2 is available.
+You should consider upgrading via the 'pip install --upgrade pip' command.}
+Requirement already satisfied: numpy in /anaconda3/lib/python3.6/site-packages (1.16.1)
+\textcolor{ansi-yellow}{WARNING: You are using pip version 19.2.1, however version 19.2.2 is available.
+You should consider upgrading via the 'pip install --upgrade pip' command.}
+
+    \end{Verbatim}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}2}]:} \PY{k+kn}{from} \PY{n+nn}{astropy}\PY{n+nn}{.}\PY{n+nn}{io} \PY{k}{import} \PY{n}{fits}
+        \PY{k+kn}{import} \PY{n+nn}{matplotlib}\PY{n+nn}{.}\PY{n+nn}{pyplot} \PY{k}{as} \PY{n+nn}{plt}
+        \PY{k+kn}{import} \PY{n+nn}{numpy} \PY{k}{as} \PY{n+nn}{np}
+        \PY{k+kn}{from} \PY{n+nn}{spec\PYZus{}tools} \PY{k}{import} \PY{o}{*}
+        \PY{k+kn}{import} \PY{n+nn}{subprocess}
+        \PY{o}{\PYZpc{}}\PY{k}{matplotlib} inline
+\end{Verbatim}
+
+
+    Great. For this assignment we will be looking at a star HD122563 and
+comparing it to a Solar twin star HD147513.
+
+The aim of this assignment is to get an idea of concepts such as
+spectral type and features, radial velocity and metallicity.
+
+    \section{Prep: First we need to read in our
+data}\label{prep-first-we-need-to-read-in-our-data}
+
+We can do this using a pre-defined function called 'open\_file'. This
+function takes the id of the star as an argument, and assigns the
+wavelength and flux arrays to the output of this function. Simply 'run'
+the code box below by selecting the box and pressing 'shift'+'enter'
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}14}]:} \PY{n}{star\PYZus{}id} \PY{o}{=} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{HD122563}\PY{l+s+s1}{\PYZsq{}}
+         \PY{n}{wave}\PY{p}{,}\PY{n}{flux} \PY{o}{=} \PY{n}{open\PYZus{}file}\PY{p}{(}\PY{n}{star\PYZus{}id}\PY{p}{)}
+         
+         \PY{n}{solar\PYZus{}twin} \PY{o}{=} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{HD147513}\PY{l+s+s1}{\PYZsq{}}
+         \PY{n}{sol\PYZus{}wave}\PY{p}{,}\PY{n}{sol\PYZus{}flux} \PY{o}{=} \PY{n}{open\PYZus{}file}\PY{p}{(}\PY{n}{solar\PYZus{}twin}\PY{p}{)}
+\end{Verbatim}
+
+
+    Now we've read in the data, we can plot the flux and wavelength of these
+spectra using the matplotlib functions below. Again simply select the
+box and press 'shift'+'enter'
+
+    Use the zoom to rectangle icon Above the plot to zoom in on some
+spectral features. Note - The home button resets to the original view
+Alternatively, you can remove the '\#' from the bottom lines to zoom
+into sections the following command to automatically zoom in on a
+wavelength range.
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}15}]:} \PY{o}{\PYZpc{}}\PY{k}{matplotlib} notebook
+         \PY{c+c1}{\PYZsh{}Plots a figure and a set of axes for which we can use to plot our data.}
+         \PY{n}{fig}\PY{p}{,}\PY{n}{ax} \PY{o}{=} \PY{n}{plt}\PY{o}{.}\PY{n}{subplots}\PY{p}{(}\PY{l+m+mi}{1}\PY{p}{,}\PY{l+m+mi}{2}\PY{p}{,}\PY{n}{figsize}\PY{o}{=}\PY{p}{(}\PY{l+m+mi}{10}\PY{p}{,}\PY{l+m+mi}{5}\PY{p}{)}\PY{p}{)} \PY{c+c1}{\PYZsh{} this is making a figure for us to put two plots in}
+         
+         \PY{c+c1}{\PYZsh{}Plot spectrum for HD122563}
+         \PY{n}{ax}\PY{p}{[}\PY{l+m+mi}{0}\PY{p}{]}\PY{o}{.}\PY{n}{plot}\PY{p}{(}\PY{n}{wave}\PY{p}{,}\PY{n}{flux}\PY{p}{)} 
+         \PY{n}{ax}\PY{p}{[}\PY{l+m+mi}{0}\PY{p}{]}\PY{o}{.}\PY{n}{set\PYZus{}ylim}\PY{p}{(}\PY{l+m+mi}{0}\PY{p}{,}\PY{l+m+mf}{1.1}\PY{p}{)}
+         \PY{n}{ax}\PY{p}{[}\PY{l+m+mi}{0}\PY{p}{]}\PY{o}{.}\PY{n}{set\PYZus{}title}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{HD122563}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+         
+         \PY{c+c1}{\PYZsh{}Do the same for HD147513}
+         \PY{n}{ax}\PY{p}{[}\PY{l+m+mi}{1}\PY{p}{]}\PY{o}{.}\PY{n}{plot}\PY{p}{(}\PY{n}{sol\PYZus{}wave}\PY{p}{,}\PY{n}{sol\PYZus{}flux}\PY{p}{)}
+         \PY{n}{ax}\PY{p}{[}\PY{l+m+mi}{1}\PY{p}{]}\PY{o}{.}\PY{n}{set\PYZus{}ylim}\PY{p}{(}\PY{l+m+mi}{0}\PY{p}{,}\PY{l+m+mf}{1.1}\PY{p}{)}
+         \PY{n}{ax}\PY{p}{[}\PY{l+m+mi}{1}\PY{p}{]}\PY{o}{.}\PY{n}{set\PYZus{}title}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{HD147513}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+         
+         \PY{c+c1}{\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{} FOR  HDHD122563 \PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}}
+         
+         \PY{c+c1}{\PYZsh{} ax[0].set\PYZus{}xlim(3950,4000)}
+         
+         \PY{c+c1}{\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{} FOR HD147513 \PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}}
+         
+         \PY{c+c1}{\PYZsh{}ax[1].set\PYZus{}xlim(3950,4000)}
+\end{Verbatim}
+
+
+    
+    \begin{verbatim}
+<IPython.core.display.Javascript object>
+    \end{verbatim}
+
+    
+    
+    \begin{verbatim}
+<IPython.core.display.HTML object>
+    \end{verbatim}
+
+    
+\begin{Verbatim}[commandchars=\\\{\}]
+{\color{outcolor}Out[{\color{outcolor}15}]:} Text(0.5, 1.0, 'HD147513')
+\end{Verbatim}
+            
+    \section{PART 1 - FINDING SPECTRAL
+TYPE}\label{part-1---finding-spectral-type}
+
+Using the plots above, let's look at how do these two spectra differ
+qualitatively.
+
+Question 1: What is the spectral type of HD147513? Comparitively, what
+is the spectral type of HD122563? Hint: What significant spectral
+features come and go with OBAFGKM spectral types? Make reference to
+these spectral features to justify your answer.
+
+     The solar twin is a G type star, HD122563 is a metal poor red giant
+star approx F8 
+
+    Question 2: Name two things that contribute to the width/profile of an
+absorption line?
+
+     1. the number of atoms, more atoms the more photons that are absorbed
+and the boarder/wider the absorbtion line. 2. Lines can be
+widened/boarden from doppler shift. 
+
+    \section{Part 2 - RADIAL VELOCITY}\label{part-2---radial-velocity}
+
+    Let's use this plot to measure the radial velocity of the star. You can
+zoom in on a line feature (by setting the appropriate x-range limits)
+and then compare the observed wavelength for the line feature with the
+rest wavelength of that feature to find the radial velocity of the star.
+Hold the cursor over the plot to see the wavelength of the absorption
+feature. We can use the rest frame Balmer series lines to compare to
+calculate the radial velocity of this star.
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}16}]:} \PY{o}{\PYZpc{}}\PY{k}{matplotlib} notebook
+         \PY{n}{fig}\PY{p}{,}\PY{n}{ax} \PY{o}{=} \PY{n}{plt}\PY{o}{.}\PY{n}{subplots}\PY{p}{(}\PY{p}{)}
+         \PY{n}{ax}\PY{o}{.}\PY{n}{plot}\PY{p}{(}\PY{n}{wave}\PY{p}{,}\PY{n}{flux}\PY{p}{)}
+         \PY{n}{ax}\PY{o}{.}\PY{n}{set\PYZus{}ylim}\PY{p}{(}\PY{l+m+mi}{0}\PY{p}{,}\PY{l+m+mf}{1.1}\PY{p}{)}
+         \PY{n}{ax}\PY{o}{.}\PY{n}{set\PYZus{}title}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{HD122563}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+         
+         \PY{c+c1}{\PYZsh{} You can use the following command to automatically zoom in on a wavelength range }
+         \PY{c+c1}{\PYZsh{} or use the zoom to rectangle button below}
+         
+         \PY{n}{ax}\PY{o}{.}\PY{n}{set\PYZus{}xlim}\PY{p}{(}\PY{l+m+mi}{4330}\PY{p}{,}\PY{l+m+mi}{4350}\PY{p}{)}
+\end{Verbatim}
+
+
+    
+    \begin{verbatim}
+<IPython.core.display.Javascript object>
+    \end{verbatim}
+
+    
+    
+    \begin{verbatim}
+<IPython.core.display.HTML object>
+    \end{verbatim}
+
+    
+\begin{Verbatim}[commandchars=\\\{\}]
+{\color{outcolor}Out[{\color{outcolor}16}]:} (4330, 4350)
+\end{Verbatim}
+            
+    H \(\beta\) = 4861.36 Angstrom
+
+H \(\gamma\) = 4340.46 Angstrom
+
+    
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}17}]:} \PY{c+c1}{\PYZsh{}Compute the radial velocity here:}
+         \PY{c+c1}{\PYZsh{}remove hashes and enter relevant values to run the code and print the radial velocity}
+         \PY{c+c1}{\PYZsh{} Try doing this for all three lines to get an average and standard deviation as an estimate of the error.}
+         
+         \PY{n}{c} \PY{o}{=} \PY{l+m+mf}{2.99793e5}
+         \PY{n}{lamb\PYZus{}obs} \PY{o}{=} \PY{l+m+mf}{4339.96}
+         \PY{n}{lamb\PYZus{}rest} \PY{o}{=} \PY{l+m+mf}{4340.46}
+         
+         \PY{n}{V\PYZus{}rad} \PY{o}{=} \PY{n}{c} \PY{o}{*} \PY{p}{(}\PY{n}{lamb\PYZus{}obs} \PY{o}{\PYZhy{}} \PY{n}{lamb\PYZus{}rest}\PY{p}{)}\PY{o}{/}\PY{p}{(}\PY{n}{lamb\PYZus{}rest}\PY{p}{)}
+         
+         \PY{n+nb}{print}\PY{p}{(}\PY{n}{V\PYZus{}rad}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+-34.53470369500007
+
+    \end{Verbatim}
+
+    This equation can be re-arranged to apply a shift to the observed
+spectrum to achieve a rest wavelength state. Hint: make sure you use the
+correct sign to the radial velocity to produce the correct redshift or
+blueshift as appropriate. You can check you've made the correct
+adjustment by re-plotting the spectrum in the window above. If you make
+a mistake and what the original spectrum, just reload the file using:
+wave,flux = open\_file(star\_id1)
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}18}]:} \PY{c+c1}{\PYZsh{}Make the radial velocity correction to the wavelength array}
+         
+         \PY{n}{wave\PYZus{}new} \PY{o}{=} \PY{n}{wave} \PY{o}{+}\PY{o}{\PYZhy{}} \PY{n}{wave}\PY{o}{*}\PY{n}{V\PYZus{}rad}\PY{o}{/}\PY{n}{c}
+         
+         \PY{o}{\PYZpc{}}\PY{k}{matplotlib} notebook
+         \PY{n}{fig}\PY{p}{,}\PY{n}{ax} \PY{o}{=} \PY{n}{plt}\PY{o}{.}\PY{n}{subplots}\PY{p}{(}\PY{p}{)}
+         \PY{n}{ax}\PY{o}{.}\PY{n}{plot}\PY{p}{(}\PY{n}{wave\PYZus{}new}\PY{p}{,}\PY{n}{flux}\PY{p}{)}
+         \PY{n}{ax}\PY{o}{.}\PY{n}{set\PYZus{}ylim}\PY{p}{(}\PY{l+m+mi}{0}\PY{p}{,}\PY{l+m+mf}{1.1}\PY{p}{)}
+         \PY{n}{ax}\PY{o}{.}\PY{n}{set\PYZus{}title}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{HD122563}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+         
+         \PY{c+c1}{\PYZsh{} You can use the following command to automatically zoom in on a wavelength range }
+         \PY{c+c1}{\PYZsh{} or use the zoom to rectangle button below}
+         
+         \PY{n}{ax}\PY{o}{.}\PY{n}{set\PYZus{}xlim}\PY{p}{(}\PY{l+m+mi}{4330}\PY{p}{,}\PY{l+m+mi}{4350}\PY{p}{)}
+\end{Verbatim}
+
+
+    
+    \begin{verbatim}
+<IPython.core.display.Javascript object>
+    \end{verbatim}
+
+    
+    
+    \begin{verbatim}
+<IPython.core.display.HTML object>
+    \end{verbatim}
+
+    
+\begin{Verbatim}[commandchars=\\\{\}]
+{\color{outcolor}Out[{\color{outcolor}18}]:} (4330, 4350)
+\end{Verbatim}
+            
+    Question 3: Radial velocities stretch and shift the spectrum along the
+wavelength axis. What happens to a spectrum when the source is spinning
+rapidly?
+
+     redshifted 
+
+    \section{PART 3 - METALLICITY}\label{part-3---metallicity}
+
+    Metallicity is a measure of how many 'metals' or heavy elements are in a
+star compared to Hydrogen. Metal enrichment happens over many
+generations of stars and so the Sun is quite metal rich compared to
+older stars that are found for example in the Galactic bulge or halo. In
+this section we are going to measure the metallicity of HD122563 and
+compare it to the Solar value.
+
+    Question 4: Iron content compared to Hydrogen is used as a proxy for
+metallicity. Explain why this is a reasonable approximation.
+
+     We compare Iron to Hydrogen to see the relative depletion of hydrogen
+in the stars, the more heavry elements (higher fraction of Iron) the
+longer the star has been undergoing fusion on the main sequence 
+
+    In this part we are going to measure the equivalent width (EW) of iron
+lines to calculate the {[}Fe/H{]} which is an abbrieviated notation for
+the Fe/H ratio compared to the Solar value on a log scale. You can
+measure EW using plot\_n\_measure\_EW function.
+
+Remember: EW = \(\int{(1 - F_{\lambda}/F_0)d\lambda}\) (where \(F_0\) is
+the flux of the continuum).
+
+The function below returns the measured EW for a spectrum, you can call
+it on the following line to measure the EW of the Ca II line shown in
+the plot. For those interested you can use this as a quantitative
+measure to compare HD122563's Na line against the Sun's.
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}33}]:} \PY{n}{plot\PYZus{}n\PYZus{}measure\PYZus{}EW\PYZus{}spectrum}\PY{p}{(}\PY{n}{wave}\PY{p}{,}\PY{n}{flux}\PY{p}{,}\PY{p}{[}\PY{l+m+mf}{5889.0}\PY{p}{,}\PY{l+m+mf}{5890.6}\PY{p}{]}\PY{p}{)}
+         \PY{n}{midpoint} \PY{o}{=} \PY{p}{(}\PY{l+m+mf}{5889.959}\PY{o}{+}\PY{l+m+mf}{5895.937}\PY{p}{)} \PY{o}{/}\PY{l+m+mi}{2} 
+         \PY{n+nb}{print}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{midpoint wavelength: }\PY{l+s+s1}{\PYZsq{}} \PY{o}{+} \PY{n+nb}{str}\PY{p}{(}\PY{n}{midpoint}\PY{p}{)}\PY{p}{)}
+\end{Verbatim}
+
+
+    
+    \begin{verbatim}
+<IPython.core.display.Javascript object>
+    \end{verbatim}
+
+    
+    
+    \begin{verbatim}
+<IPython.core.display.HTML object>
+    \end{verbatim}
+
+    
+    \begin{Verbatim}[commandchars=\\\{\}]
+Equivalent Width = 0.2 A
+midpoint wavelength: 5892.948
+
+    \end{Verbatim}
+
+    To find a list of potential iron lines, let's load a line list file
+using the function 'read\_n\_display', which takes the filename as an
+argument, reads the file and prints it to the screen. The sample line
+list is called: 'example.ew'
+
+The line list file has columns that have various characteristics of that
+line feature. For now let's focus on the first two columns, the
+wavelength of the line in angstroms and the element of the feature
+(atomic number).
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}34}]:} \PY{n}{read\PYZus{}n\PYZus{}display}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{example.ew}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+  3302.369      11.0      0.00    -1.745               XXX.X
+  3302.979      11.0      0.00    -2.050               XXX.X
+  5889.959      11.0      0.00     0.108               XXX.X  
+  5895.937      11.0      0.00    -0.194               XXX.X
+  3829.360      12.0      2.71    -0.227               XXX.X
+  4057.505      12.0      4.35    -0.900               XXX.X
+  5172.691      12.0      2.71    -0.393               XXX.X
+  5183.604      12.0      2.72    -0.167               XXX.X
+  5528.416      12.0      4.35    -0.498               XXX.X
+  5711.102      12.0      4.35    -1.724               XXX.X
+  3943.998      13.0      0.00    -0.638               XXX.X
+  3961.525      13.0      0.01    -0.340               XXX.X
+  3853.660      14.0      6.85    -1.341               XXX.X
+  3905.523      14.0      1.91    -1.041               XXX.X
+  4102.936      14.0      1.91    -2.470               XXX.X
+  5645.611      14.0      4.93    -1.630               XXX.X
+  4289.364      20.0      1.88    -0.300               XXX.X
+  4302.536      20.0      1.90     0.276               XXX.X
+  4318.650      20.0      1.90    -0.210               XXX.X
+  4425.437      20.0      1.88    -0.358               XXX.X
+  4435.677      20.0      1.89    -0.519               XXX.X
+  4454.774      20.0      1.90     0.260               XXX.X
+  4578.551      20.0      2.52    -0.558               XXX.X
+  5581.975      20.0      2.52    -0.710               XXX.X
+  5588.752      20.0      2.53     0.210               XXX.X
+  5590.113      20.0      2.52    -0.710               XXX.X
+  5594.464      20.0      2.52    -0.050               XXX.X
+  5601.290      20.0      2.53    -0.690               XXX.X
+  5857.452      20.0      2.93     0.230               XXX.X
+  4314.080      21.1      0.62    -0.100               XXX.X
+  4320.742      21.1      0.60    -0.250               XXX.X
+  5526.785      21.1      1.77     0.020               XXX.X
+  5667.149      21.1      1.50    -1.240               XXX.X
+  5669.038      21.1      1.50    -1.120               XXX.X
+  5684.195      21.1      1.51    -1.080               XXX.X
+  3924.529      22.0      0.02    -0.937               XXX.X
+  3958.210      22.0      0.05    -0.176               XXX.X
+  4512.739      22.0      0.84    -0.480               XXX.X
+  4518.027      22.0      0.83    -0.324               XXX.X
+  4533.242      22.0      0.85     0.476               XXX.X
+  4534.779      22.0      0.84     0.280               XXX.X
+  4548.765      22.0      0.83    -0.354               XXX.X
+  4555.488      22.0      0.85    -0.488               XXX.X
+  4981.735      22.0      0.85     0.504               XXX.X
+  4999.503      22.0      0.83     0.250               XXX.X
+  5022.869      22.0      0.83    -0.434               XXX.X
+  5039.957      22.0      0.02    -1.130               XXX.X
+  5173.742      22.0      0.00    -1.118               XXX.X
+  5210.384      22.0      0.05    -0.883               XXX.X
+  5866.452      22.0      1.07    -0.840               XXX.X
+  3900.540      22.1      1.13    -0.440               XXX.X
+  4300.043      22.1      1.18    -0.770               XXX.X
+  4312.879      22.1      1.18    -1.160               XXX.X
+  4395.032      22.1      1.08    -0.660               XXX.X
+  4399.765      22.1      1.23    -1.270               XXX.X
+  4417.714      22.1      1.17    -1.430               XXX.X
+  4443.806      22.1      1.08    -0.710               XXX.X
+  4468.495      22.1      1.13    -0.620               XXX.X
+  4501.275      22.1      1.12    -0.750               XXX.X
+  4533.969      22.1      1.24    -0.770               XXX.X
+  4563.762      22.1      1.22    -0.960               XXX.X
+  4571.974      22.1      1.57    -0.520               XXX.X
+  4583.412      22.1      1.16    -2.870               XXX.X
+  4589.949      22.1      1.23    -1.780               XXX.X
+  4762.767      22.1      1.08    -2.710               XXX.X
+  4865.613      22.1      1.12    -2.810               XXX.X
+  4911.193      22.1      3.12    -0.340               XXX.X
+  5185.900      22.1      1.89    -1.460               XXX.X
+  3545.198      23.1      1.10    -0.390               XXX.X
+  3592.023      23.1      1.10    -0.370               XXX.X
+  4274.804      24.0      0.00    -0.230               XXX.X
+  4289.723      24.0      0.00    -0.360               XXX.X
+  4545.957      24.0      0.94    -1.380               XXX.X
+  4600.758      24.0      1.00    -1.260               XXX.X
+  4613.365      24.0      0.96    -1.680               XXX.X
+  4616.128      24.0      0.98    -1.180               XXX.X
+  4626.177      24.0      0.97    -1.320               XXX.X
+  4652.162      24.0      1.00    -1.030               XXX.X
+  5206.042      24.0      0.94     0.019               XXX.X
+  5208.449      24.0      0.94     0.159               XXX.X
+  5298.273      24.0      0.98    -1.160               XXX.X
+  5345.799      24.0      1.00    -0.980               XXX.X
+  5348.322      24.0      1.00    -1.290               XXX.X
+  5409.789      24.0      1.03    -0.720               XXX.X
+  4754.040      25.0      2.28    -0.085               XXX.X
+  4783.425      25.0      2.30     0.042               XXX.X
+  5394.670      25.0      0.00    -3.503               XXX.X
+  3441.991      25.1      1.78    -0.273               XXX.X
+  3460.330      25.1      1.81    -0.540               XXX.X
+  3488.676      25.1      1.85    -0.860               XXX.X
+  3749.485	26.0	  0.91     0.161               XXX.X
+  3787.879	26.0	  1.01    -0.859               XXX.X
+  3841.047      26.0      1.60    -0.045               XXX.X
+  3865.528      26.0      1.01    -0.982               XXX.X
+  3886.287      26.0      0.05    -1.076               XXX.X
+  3887.049      26.0      0.92    -1.144               XXX.X
+  3891.923      26.0      3.42    -0.734               XXX.X
+  3895.656      26.0      0.11    -1.670               XXX.X
+  3899.711      26.0      0.09    -1.531               XXX.X
+  3902.948      26.0      1.56    -0.466               XXX.X
+  3906.484      26.0      0.11    -2.243               XXX.X
+  3916.730      26.0      3.23    -0.604               XXX.X
+  3920.263      26.0      0.12    -1.746               XXX.X
+  3922.916      26.0      0.05    -1.651               XXX.X
+  3930.305      26.0      0.09    -1.491               XXX.X
+  3949.954      26.0      2.18    -1.251               XXX.X
+  4271.158      26.0      2.45    -0.349               XXX.X
+  4271.768      26.0      1.49    -0.164               XXX.X
+  4282.404      26.0      2.18    -0.779               XXX.X
+  4294.114      26.0      1.49    -1.110               XXX.X
+  4299.223      26.0      2.42    -0.405               XXX.X
+  4307.902      26.0      1.56    -0.072               XXX.X
+  4325.765      26.0      1.61     0.006               XXX.X
+  4337.046      26.0      1.56    -1.695               XXX.X
+  4375.934      26.0      0.00    -3.031               XXX.X
+  4383.547      26.0      1.49     0.200               XXX.X
+  4404.752      26.0      1.56    -0.142               XXX.X
+  4415.123      26.0      1.61    -0.615               XXX.X
+  4427.317      26.0      0.05    -3.044               XXX.X
+  4430.616      26.0      2.22    -1.659               XXX.X
+  4442.340      26.0      2.20    -1.255               XXX.X
+  4447.718      26.0      2.22    -1.342               XXX.X
+  4459.107      26.0      2.18    -1.279               XXX.X
+  4461.656      26.0      0.09    -3.210               XXX.X
+  4489.744      26.0      0.12    -3.966               XXX.X
+  4494.565      26.0      2.20    -1.136               XXX.X
+  4531.149      26.0      1.49    -2.155               XXX.X
+  4592.651      26.0      1.56    -2.449               XXX.X
+  4602.946      26.0      1.49    -2.220               XXX.X
+  4625.048      26.0      3.24    -1.348               XXX.X
+  4871.317      26.0      2.87    -0.362               XXX.X
+  4872.137      26.0      2.88    -0.567               XXX.X
+  4891.491      26.0      2.85    -0.112               XXX.X
+  4918.998      26.0      2.87    -0.342               XXX.X
+  4920.509      26.0      2.83     0.068               XXX.X
+  4957.599      26.0      2.81     0.233               XXX.X
+  5166.286      26.0      0.00    -4.195               XXX.X
+  5171.600      26.0      1.49    -1.793               XXX.X
+  5192.343      26.0      3.00    -0.421               XXX.X
+  5194.944      26.0      1.56    -2.090               XXX.X
+  5198.713      26.0      2.22    -2.135               XXX.X
+  5217.387      26.0      3.21    -1.162               XXX.X
+  5227.188      26.0      1.56    -1.228               XXX.X
+  5232.941      26.0      2.94    -0.057               XXX.X
+  5269.539      26.0      0.86    -1.321               XXX.X
+  5324.181      26.0      3.21    -0.103               XXX.X
+  5393.171      26.0      3.24    -0.715               XXX.X
+  5405.782      26.0      0.99    -1.844               XXX.X
+  5410.910      26.0      4.47     0.398               XXX.X
+  5415.200      26.0      4.39     0.642               XXX.X
+  5424.066      26.0      4.32     0.510               XXX.X
+  5434.527      26.0      1.01    -2.122               XXX.X
+  5445.042      26.0      4.39    -0.030               XXX.X
+  5473.901      26.0      4.15    -0.790               XXX.X
+  5497.518      26.0      1.01    -2.849               XXX.X
+  5501.466      26.0      0.96    -3.047               XXX.X
+  5506.781      26.0      0.99    -2.797               XXX.X
+  5569.623      26.0      3.42    -0.486               XXX.X
+  5572.842      26.0      3.40    -0.275               XXX.X
+  5576.087      26.0      3.43    -0.940               XXX.X
+  5586.756      26.0      3.37    -0.144               XXX.X
+  5624.542      26.0      3.42    -0.755               XXX.X
+  5662.512      26.0      4.18    -0.573               XXX.X
+  5701.556      26.0      2.56    -2.216               XXX.X
+  5762.975      26.0      4.21    -0.470               XXX.X
+  5956.705      26.0      0.86    -4.608               XXX.X
+  3255.901      26.1      0.99    -2.498               XXX.X
+  3277.348      26.1      0.99    -2.191               XXX.X
+  3281.291      26.1      1.04    -2.678               XXX.X
+  4416.817      26.1      2.77    -2.430               XXX.X
+  4491.401      26.1      2.84    -2.600               XXX.X
+  4508.300      26.1      2.84    -2.280               XXX.X
+  4555.888      26.1      2.82    -2.170               XXX.X
+  4576.333      26.1      2.83    -2.900               XXX.X
+  4583.831      26.1      2.81    -1.740               XXX.X
+  4923.929      26.1      2.89    -1.206               XXX.X
+  5018.442      26.1      2.89    -1.350               XXX.X
+  5197.571      26.1      3.23    -2.230               XXX.X
+  5234.621      26.1      3.22    -2.220               XXX.X
+  5534.847      26.1      3.25    -2.640               XXX.X
+  3842.045      27.0      0.92    -0.763               XXX.X
+  3845.466      27.0      0.92     0.009               XXX.X
+  3873.114      27.0      0.43    -0.666               XXX.X
+  3807.145      28.0      0.42    -1.180               XXX.X
+  3858.299      28.0      0.42    -0.967               XXX.X
+  4401.550      28.0      3.19     0.084               XXX.X
+  5578.719      28.0      1.68    -2.640               XXX.X
+  5587.849      28.0      1.94    -2.140               XXX.X
+  5592.280      28.0      1.95    -2.590               XXX.X
+  5892.883      28.0      1.99    -2.340               XXX.X
+  3247.540      29.0      0.00    -0.056               XXX.X
+  3273.959      29.0      0.00    -0.360               XXX.X
+  4607.331      38.0      0.00     0.283               XXX.X
+  3774.334      39.1      0.13     0.220               XXX.X
+  3788.697      39.1      0.10    -0.060               XXX.X
+  3818.350      39.1      0.13    -0.974               XXX.X
+  3832.887      39.1      0.18    -0.330               XXX.X
+  3950.351      39.1      0.10    -0.484               XXX.X
+  4398.013      39.1      0.13    -1.000               XXX.X
+  4883.688      39.1      1.08     0.070               XXX.X
+  5123.210      39.1      0.99    -0.830               XXX.X
+  5200.413      39.1      0.99    -0.570               XXX.X
+  5205.734      39.1      1.03    -0.340               XXX.X
+  3836.761      40.1      0.56    -0.060               XXX.X
+  4317.315      40.1      0.71    -1.380               XXX.X
+  4554.033      56.1      0.00     0.140               XXX.X
+  4934.076      56.1      0.00    -0.160               XXX.X
+  5853.685      56.1      0.60    -0.908               XXX.X
+  3964.260      59.1      0.22    -0.400               XXX.X
+  4061.090      60.1      0.47     0.290               XXX.X
+  3538.522      66.1      0.00    -0.020               XXX.X
+  3810.730      67.1      0.00     0.190               XXX.X
+
+
+    \end{Verbatim}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}35}]:} \PY{c+c1}{\PYZsh{}\PYZsh{}\PYZsh{} Enter your code here \PYZsh{}\PYZsh{} }
+         
+         \PY{c+c1}{\PYZsh{}\PYZsh{} HINT : You will need to play around with moving the star and stop of each }
+         \PY{c+c1}{\PYZsh{} absorbtion line to get the fit only over the absorbtion line }
+         
+         \PY{n}{plot\PYZus{}n\PYZus{}measure\PYZus{}EW\PYZus{}spectrum}\PY{p}{(}\PY{n}{wave}\PY{p}{,}\PY{n}{flux}\PY{p}{,}\PY{p}{[} \PY{l+m+mf}{3886.6} \PY{p}{,}\PY{l+m+mf}{3887.049}\PY{p}{]}\PY{p}{)}
+         \PY{n}{midpoint} \PY{o}{=} \PY{p}{(} \PY{l+m+mf}{3886.287} \PY{o}{+} \PY{l+m+mf}{4583.831}\PY{p}{)} \PY{o}{/} \PY{l+m+mf}{2.0}
+         \PY{n+nb}{print}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{midpoint wavelength: }\PY{l+s+s1}{\PYZsq{}} \PY{o}{+} \PY{n+nb}{str}\PY{p}{(}\PY{n}{midpoint}\PY{p}{)}\PY{p}{)}
+         
+         
+         \PY{c+c1}{\PYZsh{} hint: use plot\PYZus{}n\PYZus{}measure\PYZus{}EW\PYZus{}spectrum(wave,flux,[,]) function to get your EW and }
+         \PY{c+c1}{\PYZsh{} midpoint of lambda that you will need below }
+\end{Verbatim}
+
+
+    
+    \begin{verbatim}
+<IPython.core.display.Javascript object>
+    \end{verbatim}
+
+    
+    
+    \begin{verbatim}
+<IPython.core.display.HTML object>
+    \end{verbatim}
+
+    
+    \begin{Verbatim}[commandchars=\\\{\}]
+Equivalent Width = 0.1 A
+midpoint wavelength: 4235.059
+
+    \end{Verbatim}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}37}]:} \PY{n}{EW\PYZus{}1\PYZus{}HD122563} \PY{o}{=} \PY{l+m+mf}{0.2} 
+         \PY{n}{lambda\PYZus{}HD122563\PYZus{}1} \PY{o}{=} \PY{l+m+mf}{4235.059}
+         
+         \PY{n}{EW\PYZus{}2\PYZus{}HD122563} \PY{o}{=} \PY{l+m+mf}{0.1} 
+         \PY{n}{lambda\PYZus{}HD122563\PYZus{}2} \PY{o}{=} \PY{l+m+mf}{5574.4645}
+         
+         \PY{n}{EW\PYZus{}3\PYZus{}HD122563} \PY{o}{=} \PY{l+m+mf}{0.1}
+         \PY{n}{lambda\PYZus{}HD122563\PYZus{}3} \PY{o}{=}  \PY{l+m+mf}{4919.753}
+\end{Verbatim}
+
+
+    Pick 3 to 5 Fe lines from the line list (lines where the 2nd column has
+the number 26) and measure their EWs using HD122563 spectrum below.
+
+    \subsection{Part 3 Finding abundances}\label{part-3-finding-abundances}
+
+We can now use these EW to calculate a value called Epsilon which is
+descriebed below:
+
+\begin{equation*}
+\epsilon = 12 + log\left(\frac{N_{Fe}}{N_H}\right)
+\end{equation*}
+
+This value Epsilon can be used to detemined the stars elemental
+abundance. We first need to find the column density of atoms for Iron
+(Fe). The column density will be the value of N which we will step
+through how to find below
+
+** Before starting the following please have a read through
+http://spiff.rit.edu/classes/phys440/lectures/curve/curve.html **
+
+    We will now take the measured EW from above and detemine how many atoms
+are present in that line (the value of N) using the below figure, The Y
+axis is log(EW /lambda), (EW written above as W) \textbf{This is your
+measured EW} And the X axis is log Nf(lambda/5000 Angstroms) where N is
+the column density.
+
+\textbf{Note} the line can be descibed by three eqautions as shown
+overlaid the plot. The value of N is the eqaution of the X axis
+
+    
+
+    \subsection{Step 1. Find the value of
+Y:}\label{step-1.-find-the-value-of-y}
+
+\begin{equation*}
+Y = log10(\frac{EW}{\lambda})
+\end{equation*}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}38}]:} \PY{c+c1}{\PYZsh{}\PYZsh{} Example on Na}
+         \PY{c+c1}{\PYZsh{}\PYZsh{} USE THE BELOW EQUATION \PYZsh{}\PYZsh{} }
+         \PY{c+c1}{\PYZsh{}  y = np.log10(EW/central wavelength) }
+         
+         \PY{n}{Y} \PY{o}{=} \PY{n}{np}\PY{o}{.}\PY{n}{log10}\PY{p}{(}\PY{l+m+mf}{0.2}\PY{o}{/}\PY{l+m+mf}{5892.948}\PY{p}{)}
+         \PY{n+nb}{print}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Y value for Na: }\PY{l+s+s1}{\PYZsq{}} \PY{o}{+} \PY{n+nb}{str}\PY{p}{(}\PY{n}{Y}\PY{p}{)}\PY{p}{)}
+         
+         \PY{c+c1}{\PYZsh{}\PYZsh{} Do the same for your 3 to 5 Fe lines below below, where you place }
+         \PY{c+c1}{\PYZsh{}\PYZsh{} your EW and lambda for each line: }
+         
+         \PY{n}{y\PYZus{}Fe\PYZus{}1\PYZus{}HD122563} \PY{o}{=} \PY{n}{np}\PY{o}{.}\PY{n}{log10}\PY{p}{(}\PY{n}{EW\PYZus{}1\PYZus{}HD122563} \PY{o}{/}\PY{n}{lambda\PYZus{}HD122563\PYZus{}1} \PY{p}{)}
+         \PY{n+nb}{print}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Y value for Fe line 1: }\PY{l+s+s1}{\PYZsq{}} \PY{o}{+} \PY{n+nb}{str}\PY{p}{(}\PY{n}{y\PYZus{}Fe\PYZus{}1\PYZus{}HD122563}\PY{p}{)}\PY{p}{)}
+         
+         \PY{n}{y\PYZus{}Fe\PYZus{}2\PYZus{}HD122563} \PY{o}{=} \PY{n}{np}\PY{o}{.}\PY{n}{log10}\PY{p}{(}\PY{n}{EW\PYZus{}2\PYZus{}HD122563} \PY{o}{/}\PY{n}{lambda\PYZus{}HD122563\PYZus{}2} \PY{p}{)}
+         \PY{n+nb}{print}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Y value for Fe line 2: }\PY{l+s+s1}{\PYZsq{}} \PY{o}{+} \PY{n+nb}{str}\PY{p}{(}\PY{n}{y\PYZus{}Fe\PYZus{}2\PYZus{}HD122563}\PY{p}{)}\PY{p}{)}
+         
+         \PY{n}{y\PYZus{}Fe\PYZus{}2\PYZus{}HD122563} \PY{o}{=} \PY{n}{np}\PY{o}{.}\PY{n}{log10}\PY{p}{(}\PY{n}{EW\PYZus{}3\PYZus{}HD122563} \PY{o}{/}\PY{n}{lambda\PYZus{}HD122563\PYZus{}3} \PY{p}{)}
+         \PY{n+nb}{print}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Y value for Fe line 2: }\PY{l+s+s1}{\PYZsq{}} \PY{o}{+} \PY{n+nb}{str}\PY{p}{(}\PY{n}{y\PYZus{}Fe\PYZus{}2\PYZus{}HD122563}\PY{p}{)}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+Y value for Na: -4.469302613187371
+Y value for Fe line 1: -4.325829469344172
+Y value for Fe line 2: -4.746203154076228
+Y value for Fe line 2: -4.69194329922472
+
+    \end{Verbatim}
+
+    \subsection{Step 2 Find the value of
+X:}\label{step-2-find-the-value-of-x}
+
+Go back to the plot above, and find what the approximate value of x is
+along the line of growth. See example for Ca II below:
+
+** We find the approximate X value is 15.35. **
+
+    \#\# TO DO: Find X value for Fe
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}39}]:} \PY{c+c1}{\PYZsh{}\PYZsh{} Save your values for X\PYZus{}Fe below as variables to use later }
+         
+         \PY{n}{X\PYZus{}Fe\PYZus{}1\PYZus{}HD122563} \PY{o}{=} \PY{l+m+mf}{13.9}
+         \PY{n+nb}{print}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{X value for Fe line 1: }\PY{l+s+s1}{\PYZsq{}} \PY{o}{+} \PY{n+nb}{str}\PY{p}{(}\PY{n}{X\PYZus{}Fe\PYZus{}1\PYZus{}HD122563}\PY{p}{)}\PY{p}{)}
+         
+         \PY{n}{X\PYZus{}Fe\PYZus{}2\PYZus{}HD122563} \PY{o}{=} \PY{l+m+mf}{12.05}
+         \PY{n+nb}{print}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{X value for Fe line 2: }\PY{l+s+s1}{\PYZsq{}} \PY{o}{+} \PY{n+nb}{str}\PY{p}{(}\PY{n}{X\PYZus{}Fe\PYZus{}2\PYZus{}HD122563}\PY{p}{)}\PY{p}{)}
+         
+         \PY{n}{X\PYZus{}Fe\PYZus{}3\PYZus{}HD122563} \PY{o}{=} \PY{l+m+mf}{12.25}
+         \PY{n+nb}{print}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{X value for Fe line 3: }\PY{l+s+s1}{\PYZsq{}} \PY{o}{+} \PY{n+nb}{str}\PY{p}{(}\PY{n}{X\PYZus{}Fe\PYZus{}3\PYZus{}HD122563}\PY{p}{)}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+X value for Fe line 1: 13.9
+X value for Fe line 2: 12.05
+X value for Fe line 3: 12.25
+
+    \end{Verbatim}
+
+    \subsection{Step 3 Find the value of
+N:}\label{step-3-find-the-value-of-n}
+
+This value of N is in atoms per cm\^{}2 (This value for f will not be
+completely accuate for all lines of Fe but will do for the propose of
+this assignment, we are using the oscillator strength specficlly of the
+Fe II transistion at 321.045nm. Oscillator numbers for ions can be found
+here http://vizier.u-strasbg.fr/viz-bin/VizieR-3?-source=VI/69/catalog,
+where the value of \(gf\) is log(f))
+
+    \#\# TO DO: Find N value for Fe
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}44}]:} \PY{c+c1}{\PYZsh{} Fill in the values for X and Lambda below to find your value of N for HD122563,  use the example}
+         \PY{c+c1}{\PYZsh{} code of Na as a template }
+         
+         \PY{c+c1}{\PYZsh{} N = (10**(X))/((f)*((lambda)/(5000)))}
+         \PY{c+c1}{\PYZsh{} N = (10**(15.35))/((1.19)*((3933.8)/(5000)))}
+         \PY{n}{f} \PY{o}{=} \PY{l+m+mf}{0.020}
+         \PY{n}{N\PYZus{}Fe\PYZus{}HD122563\PYZus{}1} \PY{o}{=} \PY{p}{(}\PY{l+m+mi}{10}\PY{o}{*}\PY{o}{*}\PY{p}{(}\PY{n}{X\PYZus{}Fe\PYZus{}1\PYZus{}HD122563}\PY{p}{)}\PY{p}{)}\PY{o}{/}\PY{p}{(}\PY{p}{(}\PY{n}{f}\PY{p}{)}\PY{o}{*}\PY{p}{(}\PY{p}{(}\PY{n}{lambda\PYZus{}HD122563\PYZus{}1}\PY{p}{)}\PY{o}{/}\PY{p}{(}\PY{l+m+mi}{5000}\PY{p}{)}\PY{p}{)}\PY{p}{)}
+         \PY{n+nb}{print}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{N value for Fe line 1: }\PY{l+s+s1}{\PYZsq{}} \PY{o}{+} \PY{n+nb}{str}\PY{p}{(}\PY{n}{N\PYZus{}Fe\PYZus{}HD122563\PYZus{}1}\PY{p}{)}\PY{p}{)}
+         
+         \PY{n}{N\PYZus{}Fe\PYZus{}HD122563\PYZus{}2} \PY{o}{=} \PY{p}{(}\PY{l+m+mi}{10}\PY{o}{*}\PY{o}{*}\PY{p}{(}\PY{n}{X\PYZus{}Fe\PYZus{}2\PYZus{}HD122563}\PY{p}{)}\PY{p}{)}\PY{o}{/}\PY{p}{(}\PY{p}{(}\PY{n}{f}\PY{p}{)}\PY{o}{*}\PY{p}{(}\PY{p}{(}\PY{n}{lambda\PYZus{}HD122563\PYZus{}2}\PY{p}{)}\PY{o}{/}\PY{p}{(}\PY{l+m+mi}{5000}\PY{p}{)}\PY{p}{)}\PY{p}{)}
+         \PY{n+nb}{print}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{N value for Fe line 2: }\PY{l+s+s1}{\PYZsq{}} \PY{o}{+} \PY{n+nb}{str}\PY{p}{(}\PY{n}{N\PYZus{}Fe\PYZus{}HD122563\PYZus{}2}\PY{p}{)}\PY{p}{)}
+         
+         \PY{n}{N\PYZus{}Fe\PYZus{}HD122563\PYZus{}3} \PY{o}{=} \PY{p}{(}\PY{l+m+mi}{10}\PY{o}{*}\PY{o}{*}\PY{p}{(}\PY{n}{X\PYZus{}Fe\PYZus{}2\PYZus{}HD122563}\PY{p}{)}\PY{p}{)}\PY{o}{/}\PY{p}{(}\PY{p}{(}\PY{n}{f}\PY{p}{)}\PY{o}{*}\PY{p}{(}\PY{p}{(}\PY{n}{lambda\PYZus{}HD122563\PYZus{}2}\PY{p}{)}\PY{o}{/}\PY{p}{(}\PY{l+m+mi}{5000}\PY{p}{)}\PY{p}{)}\PY{p}{)}
+         \PY{n+nb}{print}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{N value for Fe line 3: }\PY{l+s+s1}{\PYZsq{}} \PY{o}{+} \PY{n+nb}{str}\PY{p}{(}\PY{n}{N\PYZus{}Fe\PYZus{}HD122563\PYZus{}3}\PY{p}{)}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+N value for Fe line 1: 4689003357003304.0
+N value for Fe line 2: 50319562278222.66
+N value for Fe line 3: 50319562278222.66
+
+    \end{Verbatim}
+
+    \section{Now redo the same steps and find the value for the solar twin
+HD147513}\label{now-redo-the-same-steps-and-find-the-value-for-the-solar-twin-hd147513}
+
+We will start you off ...
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}58}]:} \PY{c+c1}{\PYZsh{}\PYZsh{} do the same steps }
+         
+         \PY{c+c1}{\PYZsh{} Pick 3 to 5 Fe lines from the line list for the solar twin }
+         \PY{c+c1}{\PYZsh{} hint: plot\PYZus{}n\PYZus{}measure\PYZus{}EW\PYZus{}spectrum(sol\PYZus{}wave,sol\PYZus{}flux,[,]) }
+         
+         \PY{n}{EW\PYZus{}1\PYZus{}HD147513} \PY{o}{=} \PY{n}{plot\PYZus{}n\PYZus{}measure\PYZus{}EW\PYZus{}spectrum}\PY{p}{(}\PY{n}{sol\PYZus{}wave}\PY{p}{,}\PY{n}{sol\PYZus{}flux}\PY{p}{,}\PY{p}{[} \PY{l+m+mf}{3886.6} \PY{p}{,}\PY{l+m+mf}{3886.9}\PY{p}{]}\PY{p}{)}
+         \PY{n}{lambda\PYZus{}HD147513\PYZus{}1} \PY{o}{=} \PY{p}{(} \PY{l+m+mf}{3886.6} \PY{o}{+} \PY{l+m+mf}{3886.9}\PY{p}{)} \PY{o}{/} \PY{l+m+mf}{2.0}
+         
+         
+         \PY{n}{EW\PYZus{}2\PYZus{}HD147513} \PY{o}{=}\PY{n}{plot\PYZus{}n\PYZus{}measure\PYZus{}EW\PYZus{}spectrum}\PY{p}{(}\PY{n}{sol\PYZus{}wave}\PY{p}{,}\PY{n}{sol\PYZus{}flux}\PY{p}{,}\PY{p}{[} \PY{l+m+mf}{4919.3} \PY{p}{,}\PY{l+m+mf}{4919.85}\PY{p}{]}\PY{p}{)}
+         \PY{n}{lambda\PYZus{}HD147513\PYZus{}2} \PY{o}{=}  \PY{p}{(} \PY{l+m+mf}{4919.3} \PY{o}{+} \PY{l+m+mf}{4919.85}\PY{p}{)} \PY{o}{/} \PY{l+m+mf}{2.0}
+         
+         
+         \PY{n}{EW\PYZus{}3\PYZus{}HD147513} \PY{o}{=} \PY{n}{plot\PYZus{}n\PYZus{}measure\PYZus{}EW\PYZus{}spectrum}\PY{p}{(}\PY{n}{sol\PYZus{}wave}\PY{p}{,}\PY{n}{sol\PYZus{}flux}\PY{p}{,}\PY{p}{[}\PY{l+m+mf}{5703.1} \PY{p}{,} \PY{l+m+mf}{5703.8} \PY{p}{]}\PY{p}{)}
+         \PY{n}{lambda\PYZus{}HD147513\PYZus{}3} \PY{o}{=}  \PY{p}{(}\PY{l+m+mf}{5703.1} \PY{o}{+} \PY{l+m+mf}{5171.82}\PY{p}{)} \PY{o}{/} \PY{l+m+mf}{2.0}
+\end{Verbatim}
+
+
+    
+    \begin{verbatim}
+<IPython.core.display.Javascript object>
+    \end{verbatim}
+
+    
+    
+    \begin{verbatim}
+<IPython.core.display.HTML object>
+    \end{verbatim}
+
+    
+    \begin{Verbatim}[commandchars=\\\{\}]
+Equivalent Width = 0.1 A
+
+    \end{Verbatim}
+
+    
+    \begin{verbatim}
+<IPython.core.display.Javascript object>
+    \end{verbatim}
+
+    
+    
+    \begin{verbatim}
+<IPython.core.display.HTML object>
+    \end{verbatim}
+
+    
+    \begin{Verbatim}[commandchars=\\\{\}]
+Equivalent Width = 0.1 A
+
+    \end{Verbatim}
+
+    
+    \begin{verbatim}
+<IPython.core.display.Javascript object>
+    \end{verbatim}
+
+    
+    
+    \begin{verbatim}
+<IPython.core.display.HTML object>
+    \end{verbatim}
+
+    
+    \begin{Verbatim}[commandchars=\\\{\}]
+Equivalent Width = 0.1 A
+EW\_1\_HD147513: None
+
+    \end{Verbatim}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}59}]:} \PY{c+c1}{\PYZsh{}\PYZsh{} Write down the values outputed for EW }
+         \PY{n}{EW\PYZus{}1\PYZus{}HD147513} \PY{o}{=} \PY{l+m+mf}{0.1}
+         \PY{n}{EW\PYZus{}2\PYZus{}HD147513} \PY{o}{=} \PY{l+m+mf}{0.1}
+         \PY{n}{EW\PYZus{}3\PYZus{}HD147513} \PY{o}{=} \PY{l+m+mf}{0.1}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}60}]:} \PY{c+c1}{\PYZsh{}  FIRST find Y value for your lines }
+         \PY{n}{y\PYZus{}Fe\PYZus{}1\PYZus{}HD147513} \PY{o}{=}  \PY{n}{np}\PY{o}{.}\PY{n}{log10}\PY{p}{(}\PY{n}{EW\PYZus{}1\PYZus{}HD147513} \PY{o}{/} \PY{n}{lambda\PYZus{}HD147513\PYZus{}1}\PY{p}{)}
+         \PY{n+nb}{print}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Y value for Fe line 1: }\PY{l+s+s1}{\PYZsq{}} \PY{o}{+} \PY{n+nb}{str}\PY{p}{(}\PY{n}{y\PYZus{}Fe\PYZus{}1\PYZus{}HD147513}\PY{p}{)}\PY{p}{)}
+         
+         \PY{n}{y\PYZus{}Fe\PYZus{}2\PYZus{}HD147513} \PY{o}{=} \PY{n}{np}\PY{o}{.}\PY{n}{log10}\PY{p}{(}\PY{n}{EW\PYZus{}2\PYZus{}HD147513} \PY{o}{/}\PY{n}{lambda\PYZus{}HD147513\PYZus{}2} \PY{p}{)}
+         \PY{n+nb}{print}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Y value for Fe line 2: }\PY{l+s+s1}{\PYZsq{}} \PY{o}{+} \PY{n+nb}{str}\PY{p}{(}\PY{n}{y\PYZus{}Fe\PYZus{}2\PYZus{}HD147513}\PY{p}{)}\PY{p}{)}
+         
+         \PY{n}{y\PYZus{}Fe\PYZus{}2\PYZus{}HD147513} \PY{o}{=} \PY{n}{np}\PY{o}{.}\PY{n}{log10}\PY{p}{(}\PY{n}{EW\PYZus{}3\PYZus{}HD147513} \PY{o}{/}\PY{n}{lambda\PYZus{}HD147513\PYZus{}3} \PY{p}{)}
+         \PY{n+nb}{print}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Y value for Fe line 2: }\PY{l+s+s1}{\PYZsq{}} \PY{o}{+} \PY{n+nb}{str}\PY{p}{(}\PY{n}{y\PYZus{}Fe\PYZus{}2\PYZus{}HD147513}\PY{p}{)}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+Y value for Fe line 1: -4.589586607234768
+Y value for Fe line 2: -4.691927585871575
+Y value for Fe line 2: -4.735396075140961
+
+    \end{Verbatim}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}64}]:} \PY{c+c1}{\PYZsh{} SECOND find your X value for your lines}
+         
+         \PY{n}{X\PYZus{}Fe\PYZus{}1\PYZus{}HD147513} \PY{o}{=} \PY{l+m+mf}{13.00}
+         \PY{n+nb}{print}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{X value for Fe line 1: }\PY{l+s+s1}{\PYZsq{}} \PY{o}{+} \PY{n+nb}{str}\PY{p}{(}\PY{n}{X\PYZus{}Fe\PYZus{}1\PYZus{}HD147513}\PY{p}{)}\PY{p}{)}
+         
+         \PY{n}{X\PYZus{}Fe\PYZus{}2\PYZus{}HD147513} \PY{o}{=} \PY{l+m+mf}{12.40}
+         \PY{n+nb}{print}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{X value for Fe line 2: }\PY{l+s+s1}{\PYZsq{}} \PY{o}{+} \PY{n+nb}{str}\PY{p}{(}\PY{n}{X\PYZus{}Fe\PYZus{}2\PYZus{}HD147513}\PY{p}{)}\PY{p}{)}
+         
+         \PY{n}{X\PYZus{}Fe\PYZus{}3\PYZus{}HD147513} \PY{o}{=} \PY{l+m+mf}{12.25}
+         \PY{n+nb}{print}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{X value for Fe line 3: }\PY{l+s+s1}{\PYZsq{}} \PY{o}{+} \PY{n+nb}{str}\PY{p}{(}\PY{n}{X\PYZus{}Fe\PYZus{}3\PYZus{}HD147513}\PY{p}{)}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+X value for Fe line 1: 13.0
+X value for Fe line 2: 12.4
+X value for Fe line 3: 12.25
+
+    \end{Verbatim}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}66}]:} \PY{c+c1}{\PYZsh{} THIRD Solve for N for each of hour lines}
+         
+         \PY{c+c1}{\PYZsh{} N = (10**(X))/((f)*((lambda)/(5000)))}
+         \PY{c+c1}{\PYZsh{} N = (10**(15.35))/((1.19)*((3933.8)/(5000)))}
+         
+         \PY{n}{N\PYZus{}Fe\PYZus{}HD147513\PYZus{}1} \PY{o}{=} \PY{p}{(}\PY{l+m+mi}{10}\PY{o}{*}\PY{o}{*}\PY{p}{(}\PY{n}{X\PYZus{}Fe\PYZus{}1\PYZus{}HD147513}\PY{p}{)}\PY{p}{)}\PY{o}{/}\PY{p}{(}\PY{p}{(}\PY{n}{f}\PY{p}{)}\PY{o}{*}\PY{p}{(}\PY{p}{(}\PY{n}{lambda\PYZus{}HD147513\PYZus{}1}\PY{p}{)}\PY{o}{/}\PY{p}{(}\PY{l+m+mi}{5000}\PY{p}{)}\PY{p}{)}\PY{p}{)}
+         \PY{n+nb}{print}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{N value for Fe line 1: }\PY{l+s+s1}{\PYZsq{}} \PY{o}{+} \PY{n+nb}{str}\PY{p}{(}\PY{n}{N\PYZus{}Fe\PYZus{}HD147513\PYZus{}1}\PY{p}{)}\PY{p}{)}
+         
+         \PY{n}{N\PYZus{}Fe\PYZus{}HD147513\PYZus{}2} \PY{o}{=} \PY{p}{(}\PY{l+m+mi}{10}\PY{o}{*}\PY{o}{*}\PY{p}{(}\PY{n}{X\PYZus{}Fe\PYZus{}2\PYZus{}HD147513}\PY{p}{)}\PY{p}{)}\PY{o}{/}\PY{p}{(}\PY{p}{(}\PY{n}{f}\PY{p}{)}\PY{o}{*}\PY{p}{(}\PY{p}{(}\PY{n}{lambda\PYZus{}HD147513\PYZus{}2}\PY{p}{)}\PY{o}{/}\PY{p}{(}\PY{l+m+mi}{5000}\PY{p}{)}\PY{p}{)}\PY{p}{)}
+         \PY{n+nb}{print}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{N value for Fe line 2: }\PY{l+s+s1}{\PYZsq{}} \PY{o}{+} \PY{n+nb}{str}\PY{p}{(}\PY{n}{N\PYZus{}Fe\PYZus{}HD147513\PYZus{}2}\PY{p}{)}\PY{p}{)}
+         
+         \PY{n}{N\PYZus{}Fe\PYZus{}HD147513\PYZus{}3} \PY{o}{=} \PY{p}{(}\PY{l+m+mi}{10}\PY{o}{*}\PY{o}{*}\PY{p}{(}\PY{n}{X\PYZus{}Fe\PYZus{}3\PYZus{}HD147513}\PY{p}{)}\PY{p}{)}\PY{o}{/}\PY{p}{(}\PY{p}{(}\PY{n}{f}\PY{p}{)}\PY{o}{*}\PY{p}{(}\PY{p}{(}\PY{n}{lambda\PYZus{}HD147513\PYZus{}3}\PY{p}{)}\PY{o}{/}\PY{p}{(}\PY{l+m+mi}{5000}\PY{p}{)}\PY{p}{)}\PY{p}{)}
+         \PY{n+nb}{print}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{N value for Fe line 3: }\PY{l+s+s1}{\PYZsq{}} \PY{o}{+} \PY{n+nb}{str}\PY{p}{(}\PY{n}{N\PYZus{}Fe\PYZus{}HD147513\PYZus{}3}\PY{p}{)}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+N value for Fe line 1: 643210908857014.2
+N value for Fe line 2: 127647532129786.7
+N value for Fe line 3: 81760574332451.31
+
+    \end{Verbatim}
+
+    Finally now we will compare out solar twin values of Fe/H to the sun. We
+will find the value of epsilon for each star first using:
+
+\begin{equation*}
+\epsilon = 12 + log\left(\frac{N_{Fe}}{N_H}\right)
+\end{equation*}
+
+We know, N\_H = 2.7 × 10\(^{19}\) so sub in the value of N\_Fe you found
+for both the original star and the solar twin to get the Fe/H ratio
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}73}]:} \PY{c+c1}{\PYZsh{}\PYZsh{} Find the average of number of Fe atoms found in the three absorbtion lines used }
+         
+         \PY{n}{Fe\PYZus{}HD122563\PYZus{}av} \PY{o}{=} \PY{p}{(}\PY{n}{N\PYZus{}Fe\PYZus{}HD122563\PYZus{}1} \PY{o}{+} \PY{n}{N\PYZus{}Fe\PYZus{}HD122563\PYZus{}2} \PY{o}{+} \PY{n}{N\PYZus{}Fe\PYZus{}HD122563\PYZus{}3}\PY{p}{)}\PY{o}{/}\PY{l+m+mi}{3}
+         \PY{n+nb}{print}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Average of HD122563: }\PY{l+s+s1}{\PYZsq{}} \PY{o}{+} \PY{n+nb}{str}\PY{p}{(}\PY{n}{Fe\PYZus{}HD122563\PYZus{}av}\PY{p}{)}\PY{p}{)}
+         
+         \PY{n}{Fe\PYZus{}HD147513\PYZus{}av} \PY{o}{=} \PY{p}{(}\PY{n}{N\PYZus{}Fe\PYZus{}HD147513\PYZus{}1} \PY{o}{+} \PY{n}{N\PYZus{}Fe\PYZus{}HD147513\PYZus{}2} \PY{o}{+} \PY{n}{N\PYZus{}Fe\PYZus{}HD147513\PYZus{}3}\PY{p}{)}\PY{o}{/}\PY{l+m+mi}{3}
+         \PY{n+nb}{print}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Average of HD147513: }\PY{l+s+s1}{\PYZsq{}} \PY{o}{+} \PY{n+nb}{str}\PY{p}{(}\PY{n}{Fe\PYZus{}HD147513\PYZus{}av}\PY{p}{)}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+Average of HD122563: 1596547493853250.0
+Average of HD147513: 284206338439750.75
+
+    \end{Verbatim}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}74}]:} \PY{c+c1}{\PYZsh{}\PYZsh{} Now use the average to solve for e }
+         
+         \PY{n}{e\PYZus{}HD122563} \PY{o}{=} \PY{l+m+mi}{12} \PY{o}{+} \PY{n}{np}\PY{o}{.}\PY{n}{log10}\PY{p}{(}\PY{n}{Fe\PYZus{}HD122563\PYZus{}av}\PY{o}{/}\PY{p}{(}\PY{l+m+mf}{2.7}\PY{o}{*}\PY{l+m+mi}{10}\PY{o}{*}\PY{o}{*}\PY{p}{(}\PY{l+m+mi}{19}\PY{p}{)}\PY{p}{)}\PY{p}{)}
+         \PY{n+nb}{print}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Epslion for HD122563: }\PY{l+s+s1}{\PYZsq{}} \PY{o}{+} \PY{n+nb}{str}\PY{p}{(}\PY{n}{e\PYZus{}HD122563}\PY{p}{)}\PY{p}{)}
+         
+         \PY{n}{e\PYZus{}HD147513} \PY{o}{=} \PY{l+m+mi}{12} \PY{o}{+} \PY{n}{np}\PY{o}{.}\PY{n}{log10}\PY{p}{(}\PY{n}{Fe\PYZus{}HD147513\PYZus{}av}\PY{o}{/}\PY{p}{(}\PY{l+m+mf}{2.7}\PY{o}{*}\PY{l+m+mi}{10}\PY{o}{*}\PY{o}{*}\PY{p}{(}\PY{l+m+mi}{19}\PY{p}{)}\PY{p}{)}\PY{p}{)}
+         \PY{n+nb}{print}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Epslion for HD147513: }\PY{l+s+s1}{\PYZsq{}} \PY{o}{+} \PY{n+nb}{str}\PY{p}{(}\PY{n}{e\PYZus{}HD147513}\PY{p}{)}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+Epslion for HD122563: 7.771818078235169
+Epslion for HD147513: 7.022269995282961
+
+    \end{Verbatim}
+
+    \subsection{Question: Is the value for epslion larger or smaller for the
+solar like
+star?}\label{question-is-the-value-for-epslion-larger-or-smaller-for-the-solar-like-star}
+
+     Solar like star HD147513 
+
+    Finally we will compare to the Fe/H values by solving the below:
+
+\begin{equation*}
+[Fe/H] = log\left(\frac{N_{Fe}}{N_H}\right) - log\left(\frac{N_{Fe}}{N_H}\right)_{\odot}
+\end{equation*}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}78}]:} \PY{c+c1}{\PYZsh{}\PYZsh{} Solve for Fe/H below. Use np.log10() when taking the log of values }
+         
+         \PY{n}{Fe\PYZus{}H} \PY{o}{=} \PY{n}{np}\PY{o}{.}\PY{n}{log10}\PY{p}{(}\PY{n}{Fe\PYZus{}HD122563\PYZus{}av}\PY{o}{/}\PY{p}{(}\PY{l+m+mf}{2.7}\PY{o}{*}\PY{l+m+mi}{10}\PY{o}{*}\PY{o}{*}\PY{p}{(}\PY{l+m+mi}{19}\PY{p}{)}\PY{p}{)}\PY{p}{)} \PY{o}{\PYZhy{}} \PY{n}{np}\PY{o}{.}\PY{n}{log10}\PY{p}{(}\PY{n}{Fe\PYZus{}HD147513\PYZus{}av}\PY{o}{/}\PY{p}{(}\PY{l+m+mf}{2.7}\PY{o}{*}\PY{l+m+mi}{10}\PY{o}{*}\PY{o}{*}\PY{p}{(}\PY{l+m+mi}{19}\PY{p}{)}\PY{p}{)}\PY{p}{)}
+         \PY{n+nb}{print}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Fe/H  Value: }\PY{l+s+s1}{\PYZsq{}} \PY{o}{+} \PY{n+nb}{str}\PY{p}{(}\PY{n}{Fe\PYZus{}H}\PY{p}{)}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+Fe/H  Value: 0.7495480829522085
+
+    \end{Verbatim}
+
+     Question 5: How do your values compare to the literature?
+
+     Type your answer to question 5 here
+
+     Question 6: what could be contributing to the source of error when
+measuring EWs and thus elemental abundances? Hint: think about the
+preparation for spectra before one even measures EW.
+
+     Type your answer to question 6 here
+
+
+    % Add a bibliography block to the postdoc
+    
+    
+    
+    \end{document}
